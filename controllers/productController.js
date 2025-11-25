@@ -109,16 +109,41 @@ const getProducts = async (req, res) => {
 ////////////////////////////////////////////////////////
 
 
-// Get product by ID
-const getProductById = async (req, res) => {
+// // Get product by ID
+// const getProductById = async (req, res) => {
+//   try {
+//     const product = await Product.findById(req.params.id);
+//     if (!product) return res.status(404).json({ message: "Product not found" });
+//     res.json(product);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };
+
+
+///////////////////////////////////
+
+// get by title
+
+
+const getProductByTitle = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
-    if (!product) return res.status(404).json({ message: "Product not found" });
-    res.json(product);
+    const { title } = req.body;
+
+    const products = await Product.find({
+      title: { $regex: title, $options: "i" }   // contains + ignore case
+    });
+
+    if (products.length === 0)
+      return res.status(404).json({ message: "No matching products found" });
+
+    res.json(products);
+
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
+
 
 // Update product by ID
 
@@ -257,7 +282,7 @@ const deleteProduct = async (req, res) => {
     }
 
     // Delete product from DB
-    
+
     await Product.findByIdAndDelete(id);
 
     res.json({ message: "Product and Cloudinary image deleted successfully" });
@@ -274,7 +299,7 @@ module.exports = {
   uploadImage,
   createProduct,
   getProducts,
-  getProductById,
+  getProductByTitle,
   updateProduct,
   deleteProduct
 

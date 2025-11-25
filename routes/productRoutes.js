@@ -8,8 +8,11 @@ router.post("/addProduct", productController.uploadImage, productController.crea
 // GET: List all products
 router.get("/readAllProducts", productController.getProducts);
 
-// GET: Single product by ID
-router.get("/readProduct/:id", productController.getProductById);
+// // GET: Single product by ID
+// router.get("/readProduct/:id", productController.getProductById);
+
+// GET: Single product by title
+router.post("/readProduct", productController.getProductByTitle);
 
 // GET: Update product by ID
 router.put("/updateProduct/:id", productController.uploadImage, productController.updateProduct);
