@@ -21,6 +21,6 @@ app.use(express.json());
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use("/products", productRoutes);
+app.use("/api/v1/products", productRoutes);
 
 app.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT}`));
