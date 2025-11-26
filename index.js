@@ -16,11 +16,10 @@ const app = express();
 //   credentials: true // if using cookies/token
 // }));
 
+
 app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"]
-  // no credentials
+  origin: '*',   
+  credentials: true 
 }));
 
 
@@ -32,4 +31,5 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/v1/products", productRoutes);
 
 app.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT}`));
+
 
