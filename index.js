@@ -9,12 +9,20 @@ conn.connectToMongoDB();
 
 const app = express();
 
+// app.use(cors({
+//   origin: "http://localhost:3000", // your React app
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+//   credentials: true // if using cookies/token
+// }));
+
 app.use(cors({
-  origin: "http://localhost:3000", // your React app
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true // if using cookies/token
+  allowedHeaders: ["Content-Type"]
+  // no credentials
 }));
+
 
 app.use(express.json());
 // app.use("/uploads", express.static("uploads")); // serve images
@@ -24,3 +32,4 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/v1/products", productRoutes);
 
 app.listen(process.env.PORT, () => console.log(`Server running on ${process.env.PORT}`));
+
