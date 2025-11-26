@@ -1,5 +1,6 @@
 const Product = require("../models/product");
 const multer = require("multer");
+const mongoose = require('mongoose')
 const fs = require('fs');
 const path = require("path");
 
@@ -110,21 +111,20 @@ const getProducts = async (req, res) => {
 
 
 // // Get product by ID
-// const getProductById = async (req, res) => {
-//   try {
-//     const product = await Product.findById(req.params.id);
-//     if (!product) return res.status(404).json({ message: "Product not found" });
-//     res.json(product);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
+const getProductById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ message: "Product not found" });
+    res.json(product);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 
-///////////////////////////////////
+////////////////////////////
 
-// get by title
-
+// get product by title
 
 const getProductByTitle = async (req, res) => {
   try {
@@ -299,6 +299,7 @@ module.exports = {
   uploadImage,
   createProduct,
   getProducts,
+  getProductById,
   getProductByTitle,
   updateProduct,
   deleteProduct

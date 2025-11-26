@@ -9,7 +9,7 @@ router.post("/addProduct", productController.uploadImage, productController.crea
 router.get("/readAllProducts", productController.getProducts);
 
 // // GET: Single product by ID
-// router.get("/readProduct/:id", productController.getProductById);
+router.get("/readProduct/:id", productController.getProductById);
 
 // GET: Single product by title
 router.post("/readProduct", productController.getProductByTitle);
